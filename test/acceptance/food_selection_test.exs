@@ -53,7 +53,7 @@ defmodule OpenPantry.FoodSelectionTest do
   test "clicking + adds to cart, decrements stock quantity", %{session: session} do
     one_credit_facility()
     session = visit(session, "/en/food_selections")
-
+    Process.sleep(500)
     {before_stock, before_requested} = {stock_available(session), stock_requested(session)}
     take_screenshot(session)
     session = click_button(session, "+")
