@@ -6,7 +6,7 @@ defmodule OpenPantry.AcceptanceCase do
       use Wallaby.DSL
 
       alias OpenPantry.Repo
-      alias OpenPantry.Web.Endpoint
+      alias OpenPantry.Endpoint
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
