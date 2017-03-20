@@ -1,3 +1,6 @@
+machine:
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/assets/node_modules/.bin"
 dependencies:
   pre:
     - scripts/ci/prepare.sh
@@ -7,7 +10,10 @@ dependencies:
     - _build
     - deps
   override:
-    - cd assets && npm install
+    - cd assets && yarn
+  cache_directories:
+    - ~/.cache/yarn
+
 
 test:
   override:
