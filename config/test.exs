@@ -63,3 +63,9 @@ config :open_pantry, OpenPantry.Repo,
   hostname: "localhost",
   ownership_timeout: OpenPantry.Ownership.timeout,
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :wallaby,
+  max_wait_time: 5_000,
+  screenshot_on_failure: true,
+  js_errors: true,
+  js_logger: :stdio
