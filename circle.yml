@@ -10,9 +10,7 @@ dependencies:
     - _build
     - deps
   override:
-    - cd assets && yarn
-  cache_directories:
-    - ~/.cache/yarn
+    - cd assets && npm install
 
 
 test:
