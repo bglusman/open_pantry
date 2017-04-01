@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  build:
+    working_directory: /tmp
+    docker:
+      - image: bitwalker/alpine-elixir-phoenix:latest
+      - image: postgres
+
+    steps:
+      - checkout
+      - run:
+        -name: CI Prepare
+        -command: scripts/ci/prepare.sh
+
+        # Caching is fully customizable in 2.0
+        - save_cache:
+          key: mix-{{ checksum "mix.lock" }}
+          paths:
+            - ~/.mix
+            - deps
+            - _build
+        - restore_cache:
+          key: mix
+
+      - run:
+        -name: Node Modules
+        - command:
+          - npm install -g yarn
+          - cd assets && yarn
+      - save_cache:
+        key: npm-{{ checksum "assets/yarn.lock" }}
+        paths:
+          - assets/node_modules
+      - restore_cache:
+        key: npm
+      - run:
+        -name: Tests
+        -command: scripts/ci/test.sh
